@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var usermail: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        usermail.text = Auth.auth().currentUser?.email
     }
 
     override func didReceiveMemoryWarning() {

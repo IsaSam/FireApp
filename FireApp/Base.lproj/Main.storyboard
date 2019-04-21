@@ -299,18 +299,26 @@
                                     <action selector="logOutButton:" destination="M6d-GP-IpW" eventType="touchUpInside" id="B70-nW-Rz5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIY-8c-E5K">
+                                <rect key="frame" x="16" y="366" width="343" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.75747541240000005" green="0.63064052829999995" blue="0.0091561094819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="mgc-HF-S9F"/>
                     </view>
                     <navigationItem key="navigationItem" id="hyG-L6-7iK"/>
                     <connections>
+                        <outlet property="usermail" destination="aIY-8c-E5K" id="2mH-Ox-96t"/>
                         <segue destination="Lgn-Xc-ttL" kind="presentation" identifier="logout" id="ERw-Wl-nJN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXe-xP-OM0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2964" y="51"/>
+            <point key="canvasLocation" x="2964" y="50.824587706146929"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
