@@ -7,13 +7,16 @@
 //
 
 import UIKit
-import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var usermail: UILabel!
+    @IBOutlet weak var messageField: UITextField!
     
+    var ref:DatabaseReference?
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,7 +28,15 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func sendMessageButton(_ sender: Any) {
+        
+        ref = Database.database().reference()
+        if messageField.text != ""{
+            ref?.child("messages").childByAutoId().setValue(messageField.text)
+            messageField.text = ""
+        }
+    }
+    
     @IBAction func logOutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
