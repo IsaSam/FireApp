@@ -10,31 +10,48 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var usermail: UILabel!
     @IBOutlet weak var messageField: UITextField!
+    @IBOutlet weak var tableView: UITableView!
     
     var ref:DatabaseReference?
+    var handle:DatabaseHandle?
+    var myMessage:[String] = []
  
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ref = Database.database().reference()
         usermail.text = Auth.auth().currentUser?.email
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        handle = ref?.child("messages").observe(.childAdded, with: { (snapshot) in
+            if let item = snapshot.value as? String
+            {
+                self.myMessage.append(item)
+                self.tableView.reloadData()
+            }
+        })
     }
     
     @IBAction func sendMessageButton(_ sender: Any) {
         
-        ref = Database.database().reference()
+        //Saving item to database
         if messageField.text != ""{
             ref?.child("messages").childByAutoId().setValue(messageField.text)
             messageField.text = ""
         }
+    }
+    
+    //Setting up our table view
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return myMessage.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.textLabel?.text = myMessage[indexPath.row]
+        return cell
     }
     
     @IBAction func logOutButton(_ sender: Any) {
@@ -47,5 +64,9 @@ class HomeViewController: UIViewController {
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
 }
